@@ -165,3 +165,149 @@ In this module, you will be able to use several more new clauses and operators i
 - Create common math operation calculated fields and aliases for calculated fields.
 - Use AVG, COUNT, MAX, MIN, SUM to profile data.
 - Summarize data according to one or more criterion using GROUP BY and HAVING clauses.
+
+
+##### explain Filter
+where
+```sql
+select col1
+from table
+where column_name ({[operator]}) ({[value]});
+```
+operators in SQL
+```SQL
+= --equal
+<> --not equal
+>
+<
+>=
+<=
+between and
+is NULL
+in -- in (9, 11 , 10) faster then or can use another select
+or
+and
+not
+and not
+```
+#### usefull note use ()
+sql here will process the or before the and so the first cond1 is the ihe one who got
+```sql
+select col1
+from table
+where cond1 or cond2 and cond3; --sql here will process the or before the and so the first cond1 is the ihe one who got
+where (cond1 or cond2) and cond3; --split the process in or and and
+```
+##### wildcards
+- string and so on not in int
+
+#### %
+```sql
+% -- before or after
+%before
+after%
+%betweens%
+startwith%thenendwith
+```
+##### sorting
+order by
+```sql
+select
+from
+order by desc
+order by asc
+```
+##### aggregate
+###### note it ingore the NULL
+
+```sql
+avg(col) as
+COUNT() as
+COUNT(*) as
+COUNT(distinct  ) as
+MIN() as
+MAX() as
+SUM() as
+```
+##### groub by
+### note every col in the select must be in the groub by or it's must be aggregated
+### note null values will be groubed in null as it's own
+### note where doesnt work
+
+```sql
+select col1,col2
+from
+where
+group by (col1,col2)
+having
+order by
+```
+## Quiz Module 2 Coding Assignment
+![i](ChinookDatabaseSchema.png)
+
+1. Find all the tracks that have a length of 5,000,000 milliseconds or more
+```sql
+select Count(TrackId)
+from Track
+where Milliseconds >= 5000000
+How many tracks are returned? [Answer: 2]
+```
+2. Find all the invoices whose total is between $5 and $15 dollars.
+```sql
+select count(DISTINCT i.InvoiceId)
+from Invoice as i
+where i.Total between 5 and 15
+How many total records there are - enter that number below. -- [Answer: 168]
+```
+3. Find all the customers from the following States: RJ, DF, AB, BC, CA, WA, NY.
+```sql
+select FirstName, LastName, Company, State
+from Customer
+where State in ('RJ', 'DF', 'AB', 'BC', 'CA', 'WA', 'NY')
+What company does Jack Smith work for? -- [Answer: Microsoft Corp.]
+```
+4. Find all the invoices for customer 56 and 58 where the total was between $1.00 and $5.00.
+```sql
+select InvoiceId, InvoiceDate, CustomerId, Total
+from Invoices
+where CustomerId in (56, 58) AND (Total >= 1.00 and Total <= 5.00)
+What was the invoice date for invoice ID 315? -- [Answer: 10-27-2012]
+```
+5. Find all the tracks whose name starts with 'All'. select t.Name, COUNT(t.Name)
+```sql
+from Track t
+where t.Name like 'All%'
+How many total records there are for this query - enter that number below. [Answer: 15]
+```
+6. Find all the customer emails that start with "J" and are from gmail.com.
+```sql
+select c.Email
+from Customer c
+where c.Email like 'J%gmail.com'
+Enter the one email address returned. [Answer: jubarnett@gmail.com]
+```
+7. Find all the invoices from Brasilia, Edmonton, and Vancouver and sort in descending order by invoice ID.
+```sql
+select i.InvoiceId, i.Total
+from Invoice i
+where i.BillingCity in ('Brasilia', 'Edmonton', 'Vancouver')
+order by i.InvoiceId DESC
+What is the total invoice amount of the first record returned? [Answer: 13.86]
+```
+8. Show the number of orders placed by each customer and sort the result by the number of orders in descending order.
+```sql
+select i.CustomerId , COUNT(i.InvoiceId)
+from Invoice i
+group by i.CustomerId
+order by COUNT(i.InvoiceId) DESC
+What is the number of items bought for the 8th person on this list? [Answer: 7]
+```
+
+9. Find the albums with 12 or more tracks.
+```sql
+select t.TrackId, t.AlbumId
+from Track t
+group by t.AlbumId
+having COUNT(DISTINCT t.TrackId) >= 12;
+How many total records there are. Enter that number below. [ Answer: 158]
+```
