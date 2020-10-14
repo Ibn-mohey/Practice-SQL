@@ -311,3 +311,24 @@ group by t.AlbumId
 having COUNT(DISTINCT t.TrackId) >= 12;
 How many total records there are. Enter that number below. [ Answer: 158]
 ```
+
+### subqueries
+
+### corss join
+
+```sql
+select col1
+from table cross join table2
+```
+
+#### inner join
+
+#### union
+```sql
+select col1
+from table
+union
+select col2
+from table
+order by
+```
