@@ -332,3 +332,91 @@ select col2
 from table
 order by
 ```
+
+
+####concatanat
+
+the pipe
+||
++
+
+#####trim
+```sql
+trim
+Rtrim
+ltrim
+```
+
+####substring
+
+```sql
+select substr(col,s,f) --s to start index f to end
+select substr(col,s,f) -- frist 3 car
+select UPPER(col1)
+select LOWER(col1)
+select UCASE(col1)
+```
+
+####working with  dates
+
+```sql
+date(timestring, modifier,modifier)
+time()
+datetime()
+julianday() --Julian day 20160806
+strftime() --
+```
+
+time string
+
+![](Screenshot_16.png)
+
+![](Screenshot_17.png)
+
+#####
+
+```sql
+select col ,
+strftime('%y', col ) as year
+strftime('%m', col ) as month
+strftime('%d', col ) as day
+select Date('now')
+strftime('%y %m %d', 'now' )
+date(('now')-birthday) as age
+```
+
+
+####case
+
+```sql
+case col
+when expressions then result
+when expressions2 and expressions then result
+when expressions3 then result
+else result
+from
+```
+
+###views
+```sql
+creat temp view if not exists view_name (col1-name-list)
+as
+SELECT
+
+```
+```sql
+select
+from view_name
+drop view_name
+
+```
+
+
+### Additional SQL Resources to Explore
+below is one of my favorite resources for practicing SQL Puzzles. I use it all the time.
+
+[SQL Authority: SQL Puzzles](https://blog.sqlauthority.com/category/sql-puzzle/)
+
+In addition, many of you may be taking this class with a desire to get a new job or position. Below is a resource that includes quizzes and is recommended by many recruiters to practice SQL for a data science interview.
+
+[SQLZOO](https://sqlzoo.net/)
