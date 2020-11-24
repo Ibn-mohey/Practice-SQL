@@ -1,4 +1,4 @@
-#there is deffrence between count and count distict
+### there is the deference between count and count distinct
 ```sql
 SELECT
   COUNT(event_id) AS events
@@ -26,17 +26,17 @@ not edited or updated once they're created.
 #ID the unreliable data
 
 1. the name of the table
-if it has temp or a date it might been for one off analysis (not good)
+if it has temp or date it might been for one-off analysis (not good)
 2. how long the name is
 
-if it's very long that means it was created for single purpose
+if it's very long that means it was created for single-purpose
 
 3. group by check
 
 
-![img](03.PNG)  
+![img](03.PNG)
 
-4. check null vaule
+4. check null value
 
 ![img](04.PNG.jpg)
 
@@ -50,11 +50,11 @@ use COALESCE() to fix nulls
 
 ```sql
 --use
-descripe tablename;
+describe tablename;
 ```
 
 
-##creat new table why ?
+## create a new table why ?
 1. for cleanliness Easier to read future queries
 2. efficiency computing once reuse again
 3. standardization for future use with coworkers
@@ -64,7 +64,7 @@ up streams that feeds the data table
 tables doesn't created yet
 down streams that takes out the data
 
-creat view_item
+create view_item
 ```sql
 create table
   view_item_events_1
@@ -101,20 +101,19 @@ referrer    VARCHAR(17),
 );
 ```
 
+
 ###why partition the data
 1. update faster
 2. retrieval faster
 3. joins faster
 
-###partition on
-1. date
-
+## problem-solving IN SQL
 
 ### answer question
 1. get the question right
 2. ID the columns needed
-3. ID the tables needed for this columns
-4. build subqueries
+3. ID the tables needed for these columns
+4. build sub queries
 5. test the joins
 6. left or right null or not
 7. add the columns then check
@@ -122,10 +121,60 @@ referrer    VARCHAR(17),
 9. make it look better
 10. give the columns a better name
 
-###Test Queries vs Final Queries
+### Test Queries vs Final Queries
 check no need to polish
 if asked more the question I need to clean
 1. descriptive sub table names
 2. columns names
 3. edge some found and handled if they would change the decision
-4. related question answered consistently 
+4. related question answered consistently
+
+### aggregation table with rolling date period
+
+bigger trends with out the noise of seasonality
+
+you need rolled up a table for that
+
+
+```sql
+
+COALESCE( sum(orders), 0) as orders
+
+from
+  dates_rolled_table
+join
+  (select
+  dates
+  orders
+  any thing
+  from noraml table )
+on
+  data_rolled >= date_normal_column
+and
+  date_rolled_7_ago < date_normal_column
+```
+### build wireframe e-mails content
+1. collect things needed
+2. tables and columns needed
+3. just recent item (window Function)
+
+### window function
+
+```SQL
+select
+rank() over (partition by column order by column asc)
+dense_rank() over (partition by column order by column asc)
+row_number() over (partition by column order by column a
+```
+
+### product analysis > analysis frame work
+
+1. under stand what the decision are at stake
+> the goal of what is being asked
+2. Refine the analysis questions
+> simplifying assumptions to make
+3. present that data inappropriate context
+> with compare help reader to understand how to feel about the answer
+
+it's better to have something to compare to as it make the question more clear
+
